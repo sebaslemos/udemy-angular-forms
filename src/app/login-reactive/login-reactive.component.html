@@ -13,6 +13,14 @@
                placeholder="Email"
                formControlName="email">
 
+        @if(email.errors?.required){
+        <mat-error>Email is mandatory</mat-error>
+        } @if (email.errors?.minlength) {
+        <mat-error>Email must have {{ email.errors.minlength.requiredLength }} chars,
+          but it has {{ email.errors.minlength.actualLength }} chars </mat-error>
+        } @if(email.errors?.email){
+        <mat-error>Email is not valid</mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field>
@@ -22,10 +30,23 @@
                placeholder="Password"
                formControlName="password">
 
+        @if(password.errors?.required){
+        <mat-error>Password is mandatory</mat-error>
+        } @else if(password.errors?.passwordStrengh){
+        <mat-error>
+          Your password is not strong enough
+        </mat-error>
+        }
+        @else if(password.errors?.minlength){
+        <mat-error>Password must have {{ password.errors.minlength.requiredLength }} chars,
+          but it has {{ password.errors.minlength.actualLength }} chars </mat-error>
+        }
+
       </mat-form-field>
 
       <button mat-raised-button
-              color="primary">
+              color="primary"
+              [disabled]="!form.valid">
         Login
       </button>
 
