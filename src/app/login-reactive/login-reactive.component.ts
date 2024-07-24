@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { createPasswordStrenghValidator } from '../validators/password-strengh.validator';
 
 
@@ -10,27 +10,19 @@ import { createPasswordStrenghValidator } from '../validators/password-strengh.v
 })
 export class LoginReactiveComponent implements OnInit {
 
-  //formcontrol as separete attribute
-  email = new FormControl('',
-    {
+  form = this.fb.group({
+    email: ['', {
       validators: [Validators.required, Validators.email],
-      updateOn: 'blur' //update on blur
-    });
-
-  password = new FormControl('', {
-    validators: [
-      Validators.required,
+      updateOn: 'blur'
+    }],
+    password: ['',
+      [Validators.required,
       Validators.minLength(8),
       createPasswordStrenghValidator()]
-  })
-
-  form = new FormGroup({
-    email: this.email,
-    password: this.password
+    ]
   });
 
-  constructor() {
-
+  constructor(private fb: FormBuilder) {
 
   }
 
