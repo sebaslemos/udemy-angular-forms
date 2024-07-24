@@ -1,0 +1,72 @@
+<mat-card class="login-page">
+  <mat-card-title>Login (template-Driven)</mat-card-title>
+  <mat-card-content>
+
+    <form class="login-form data-form"
+          #loginForm="ngForm"
+          (ngSubmit)="login(loginForm, $event)">
+
+      <mat-form-field>
+
+        <input matInput
+               type="email"
+               name="email"
+               [ngModel]="val.email"
+               #email="ngModel"
+               placeholder="Email"
+               required
+               minlength="3"
+               email>
+
+        @if(email.errors?.required){
+        <mat-error>Email is mandatory</mat-error>
+        } @if (email.errors?.minlength) {
+        <mat-error>Email must have {{ email.errors.minlength.requiredLength }} chars,
+          but it has {{ email.errors.minlength.actualLength }} chars </mat-error>
+        } @if(email.errors?.email){
+        <mat-error>Email is not valid</mat-error>
+        }
+
+      </mat-form-field>
+
+      <mat-form-field>
+
+        <input matInput
+               type="password"
+               name="password"
+               [ngModel]="val.password"
+               #password="ngModel"
+               placeholder="Password"
+               required
+               minlength="8"
+               passwordStrengh>
+
+        <ng-container></ng-container>
+
+        @if(password.errors?.required){
+        <mat-error>Password is mandatory</mat-error>
+        } @else if(password.errors?.passwordStrengh){
+        <mat-error>
+          Your password is not strong enough
+        </mat-error>
+        }
+        @else if(password.errors?.minlength){
+        <mat-error>Password must have {{ password.errors.minlength.requiredLength }} chars,
+          but it has {{ password.errors.minlength.actualLength }} chars </mat-error>
+        }
+
+      </mat-form-field>
+
+      <button mat-raised-button
+              color="primary"
+              type="submit">
+        Login
+      </button>
+
+    </form>
+
+    <div>
+      {{ loginForm.value | json}}
+    </div>
+  </mat-card-content>
+</mat-card>
