@@ -11,10 +11,11 @@ import { createPasswordStrenghValidator } from '../validators/password-strengh.v
 export class LoginReactiveComponent implements OnInit {
 
   form = this.fb.group({
-    email: ['', {
+    //avoind null values when reseting the form
+    email: this.fb.nonNullable.control(['', {
       validators: [Validators.required, Validators.email],
       updateOn: 'blur'
-    }],
+    }]),
     password: ['',
       [Validators.required,
       Validators.minLength(8),
@@ -22,6 +23,7 @@ export class LoginReactiveComponent implements OnInit {
     ]
   });
 
+  //private fb: NonNullableFormBuilder for non nullable form at all
   constructor(private fb: FormBuilder) {
 
   }
