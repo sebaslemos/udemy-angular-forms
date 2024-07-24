@@ -30,4 +30,12 @@ export class LoginReactiveComponent implements OnInit {
 
   }
 
+  get email() {
+    return this.form.get('email') as FormControl;
+  }
+
+  get password() {
+    return this.form.get('password') as FormControl;
+  }
+
 }
