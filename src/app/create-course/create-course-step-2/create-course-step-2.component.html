@@ -1,0 +1,39 @@
+<div [formGroup]="form">
+
+  <mat-radio-group formControlName="courseType">
+    <mat-radio-button value="free">Free</mat-radio-button>
+    <mat-radio-button value="premium">Premium</mat-radio-button>
+  </mat-radio-group>
+
+  <mat-form-field>
+
+    <input matInput
+           placeholder="Price"
+           formControlName="price"
+           type="number">
+
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Promotional period</mat-label>
+
+    <mat-date-range-input [rangePicker]="promopicker">
+      <input matStartDate
+             placeholder="start date"
+             formControlName="promoStartAt">
+      <input matEndDate
+             placeholder="end date"
+             formControlName="promoEndAt">
+    </mat-date-range-input>
+
+    @if(form.errors?.promoPeriod && form.dirty){
+    <mat-error> start date must be before than end date</mat-error>
+    }
+
+    <mat-datepicker-toggle matSuffix
+                           [for]="promopicker"></mat-datepicker-toggle>
+    <mat-date-range-picker #promopicker></mat-date-range-picker>
+
+  </mat-form-field>
+
+</div>
