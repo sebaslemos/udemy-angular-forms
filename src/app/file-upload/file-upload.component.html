@@ -20,3 +20,10 @@
   </button>
 
 </div>
+
+@if(uploadProgress){
+<mat-progress-bar class="mat-progress-bar"
+                  mode="determinate"
+                  [value]="uploadProgress">
+</mat-progress-bar>
+}
