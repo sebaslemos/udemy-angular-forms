@@ -14,7 +14,8 @@
 
   </mat-form-field>
 
-  <file-upload requiredFileType="image/png"></file-upload>
+  <file-upload formControlName="thumbnail"
+               requiredFileType="image/png"></file-upload>
 
   <mat-form-field>
     <mat-label>Promotional period</mat-label>
@@ -37,5 +38,7 @@
     <mat-date-range-picker #promopicker></mat-date-range-picker>
 
   </mat-form-field>
+
+  {{ form.value | json }}
 
 </div>
