@@ -15,7 +15,8 @@
   <button mat-mini-fab
           class="upload-btn"
           color="primary"
-          (click)="fileUpload.click()">
+          (click)="onClick(fileUpload)"
+          [disabled]="disabled">
     <mat-icon>attach_file</mat-icon>
   </button>
 
